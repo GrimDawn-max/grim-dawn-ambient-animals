@@ -52,6 +52,22 @@ Libraries, or set the environment variable before launching:
 To check it worked, look for `x64/GIA64-WINMM.log` after launching. If that
 file does not appear, the override has not taken effect.
 
+## Compatibility with other tools
+
+This installs as `x64/winmm.dll`. Some other Grim Dawn tools do the same —
+**dpYes!** (the player and pet DPS meter) is one — and only one file of that
+name can exist in the folder. Installing this over another tool's `winmm.dll`
+will stop that tool working, and vice versa.
+
+There is no way round it at present. `winmm` is the obvious library to use
+because the game imports it, does not ship it, and Windows is willing to load
+it from the game's own folder — so independent tools keep arriving at the same
+answer.
+
+If you want both, keep a copy of each `winmm.dll` and swap them. Renaming this
+one does not work; the game has to load it under that name.
+
+
 ## What this has been tested on
 
 Grim Dawn **1.3.0.8, GOG standalone**, on:
