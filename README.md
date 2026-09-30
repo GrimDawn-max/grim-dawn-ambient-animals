@@ -25,16 +25,32 @@ That is the whole install. The game loads `winmm.dll` from its own folder
 because Windows searches the executable's directory first and `winmm` is not a
 protected system library.
 
-### On Linux or macOS, under Wine or CrossOver
+### On macOS or Linux, under CrossOver, Wine or Proton
 
-Wine prefers its own built-in `winmm`, so it has to be told otherwise. In the
-bottle's Wine configuration, add a library override for **winmm**, set to
-**Native (Windows), then Builtin**.
+One extra step is needed. Wine ships its own `winmm` and prefers it, so it has
+to be told to use the one you just installed. Without this the files sit there
+and nothing loads.
 
-Scope it to `Grim Dawn.exe` rather than the whole bottle — a bottle-wide winmm
-override breaks other applications in it. Shut the bottle down before editing
-the registry by hand: Wine keeps it in memory and rewrites it on exit, so
-changes made while it is running are lost.
+**CrossOver.** In the bottle's settings, open Wine Configuration, and under
+Libraries add an override for **winmm**, set to **Native (Windows), then
+Builtin**. Scope it to `Grim Dawn.exe` rather than the whole bottle — a
+bottle-wide winmm override breaks other applications in it. Shut the bottle
+down before editing the registry by hand, because Wine keeps it in memory and
+rewrites it on exit, so changes made while it is running are lost.
+
+**Steam with Proton.** Set the launch options for Grim Dawn to:
+
+    WINEDLLOVERRIDES="winmm=n,b" %command%
+
+**Plain Wine or Lutris.** Either run `winecfg` and add the same override under
+Libraries, or set the environment variable before launching:
+
+    WINEDLLOVERRIDES="winmm=n,b"
+
+`n,b` means native first, then builtin — the same thing the dialog does.
+
+To check it worked, look for `x64/GIA64-WINMM.log` after launching. If that
+file does not appear, the override has not taken effect.
 
 ## Moving the animals
 
