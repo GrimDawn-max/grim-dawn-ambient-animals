@@ -52,6 +52,19 @@ Libraries, or set the environment variable before launching:
 To check it worked, look for `x64/GIA64-WINMM.log` after launching. If that
 file does not appear, the override has not taken effect.
 
+## What this has been tested on
+
+Grim Dawn **1.3.0.8, GOG standalone**, on:
+
+- Windows
+- macOS under CrossOver
+
+It has **not** been tested on the Steam version, on Proton, or on Linux. The
+mechanism is the same everywhere — the game is a Windows program in all cases,
+and the loading behaviour it relies on is standard — but untested is untested,
+and the Steam install layout and Proton's override mechanism both differ from
+what was actually verified.
+
 ## Moving the animals
 
 `x64/GIA64-world.txt` lists where each creature goes, one per line:
